@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* MathMania light theme - blue and white */
+    --background: 0 0% 100%;
+    --foreground: 215 50% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 50% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 50% 15%;
+
+    --primary: 215 80% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 60% 95%;
+    --secondary-foreground: 215 50% 15%;
+
+    --muted: 215 40% 96%;
+    --muted-foreground: 215 20% 45%;
+
+    --accent: 205 85% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 30% 90%;
+    --input: 215 30% 90%;
+    --ring: 215 80% 55%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    /* MathMania dark theme - blue and black */
+    --background: 215 50% 8%;
+    --foreground: 215 20% 95%;
+
+    --card: 215 40% 12%;
+    --card-foreground: 215 20% 95%;
+
+    --popover: 215 40% 12%;
+    --popover-foreground: 215 20% 95%;
+
+    --primary: 215 80% 60%;
+    --primary-foreground: 215 50% 10%;
+
+    --secondary: 215 40% 18%;
+    --secondary-foreground: 215 20% 95%;
+
+    --muted: 215 30% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 205 85% 65%;
+    --accent-foreground: 215 50% 10%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 30% 25%;
+    --input: 215 30% 25%;
+    --ring: 215 80% 60%;
+  }
+
+  /* High Contrast */
+  .high-contrast {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 10%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+  }
+
+  .high-contrast.dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 90%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Font sizes */
+  html.font-size-small {
+    font-size: 87.5%; /* 14px default */
+  }
+
+  html.font-size-medium {
+    font-size: 100%; /* 16px default */
+  }
+
+  html.font-size-large {
+    font-size: 112.5%; /* 18px default */
+  }
+
+  html.font-size-extra-large {
+    font-size: 125%; /* 20px default */
+  }
+
+  /* Increased spacing */
+  .increased-spacing body {
+    line-height: 1.8;
+  }
+
+  .increased-spacing p,
+  .increased-spacing ul,
+  .increased-spacing ol,
+  .increased-spacing blockquote {
+    margin-bottom: 2rem;
+  }
+
+  .increased-spacing h1,
+  .increased-spacing h2,
+  .increased-spacing h3,
+  .increased-spacing h4,
+  .increased-spacing h5,
+  .increased-spacing h6 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+}
