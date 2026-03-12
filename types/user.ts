@@ -1,10 +1,11 @@
+import { UserType } from "@/app/sign-up/page";
 import type { AccessibilitySettings } from "@/contexts/accessibility-provider";
 
 export type UserProfile = {
   uid: string;
   email: string;
   displayName: string;
-  type: "child" | "parent" | "admin";
+  type: UserType;
 
   // For child
   level?: number;

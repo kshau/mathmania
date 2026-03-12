@@ -16,6 +16,16 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -47,10 +57,14 @@ export default function AdminResourcesPage() {
   const [unlockLevel, setUnlockLevel] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [showQuizDialog, setShowQuizDialog] = useState(false);
+  const [quizPromptDescription, setQuizPromptDescription] = useState("");
+  const [showLessonDialog, setShowLessonDialog] = useState(false);
+  const [lessonPromptDescription, setLessonPromptDescription] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const handleGenerateLesson = async () => {
+  const handleGenerateLesson = async (promptDescription: string) => {
     if (!title.trim()) {
       setError("Please enter a title first to generate lesson content.");
       return;
@@ -68,6 +82,7 @@ export default function AdminResourcesPage() {
         body: JSON.stringify({
           topic: title,
           difficulty,
+          description: promptDescription,
         }),
       });
 
@@ -87,7 +102,7 @@ export default function AdminResourcesPage() {
     }
   };
 
-  const handleGenerateQuiz = async () => {
+  const handleGenerateQuiz = async (description: string) => {
     if (!title.trim()) {
       setError("Please enter a title first to generate quiz questions.");
       return;
@@ -106,6 +121,7 @@ export default function AdminResourcesPage() {
           topic: title,
           difficulty,
           numQuestions: 5,
+          description,
         }),
       });
 
@@ -347,24 +363,23 @@ export default function AdminResourcesPage() {
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={handleGenerateLesson}
+                      onClick={() => {
+                        setLessonPromptDescription("");
+                        setShowLessonDialog(true);
+                      }}
                       disabled={isGenerating || !title.trim()}
                       className="gap-1 sm:gap-2 text-xs sm:text-sm w-full sm:w-auto"
                     >
                       {isGenerating ? (
                         <>
                           <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
-                          <span className="hidden sm:inline">
-                            Generating...
-                          </span>
+                          <span className="hidden sm:inline">Generating...</span>
                           <span className="sm:hidden">Generating...</span>
                         </>
                       ) : (
                         <>
                           <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <span className="hidden sm:inline">
-                            Generate with AI
-                          </span>
+                          <span className="hidden sm:inline">Generate with AI</span>
                           <span className="sm:hidden">AI Generate</span>
                         </>
                       )}
@@ -391,24 +406,23 @@ export default function AdminResourcesPage() {
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={handleGenerateQuiz}
+                      onClick={() => {
+                        setQuizPromptDescription("");
+                        setShowQuizDialog(true);
+                      }}
                       disabled={isGenerating || !title.trim()}
                       className="gap-1 sm:gap-2 text-xs sm:text-sm w-full sm:w-auto"
                     >
                       {isGenerating ? (
                         <>
                           <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
-                          <span className="hidden sm:inline">
-                            Generating...
-                          </span>
+                          <span className="hidden sm:inline">Generating...</span>
                           <span className="sm:hidden">Generating...</span>
                         </>
                       ) : (
                         <>
                           <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
-                          <span className="hidden sm:inline">
-                            Generate with AI
-                          </span>
+                          <span className="hidden sm:inline">Generate with AI</span>
                           <span className="sm:hidden">AI Generate</span>
                         </>
                       )}
@@ -516,6 +530,66 @@ export default function AdminResourcesPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Lesson Generation Dialog */}
+      <AlertDialog open={showLessonDialog} onOpenChange={setShowLessonDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Describe the Lesson Content</AlertDialogTitle>
+            <AlertDialogDescription>
+              Optionally describe what you want covered. The AI will use this along with the title and difficulty.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Textarea
+            value={lessonPromptDescription}
+            onChange={(e) => setLessonPromptDescription(e.target.value)}
+            placeholder="e.g. Focus on visual examples and step-by-step breakdowns suitable for 2nd graders..."
+            rows={4}
+            className="mt-2"
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                setShowLessonDialog(false);
+                handleGenerateLesson(lessonPromptDescription);
+              }}
+            >
+              Generate
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Quiz Generation Dialog */}
+      <AlertDialog open={showQuizDialog} onOpenChange={setShowQuizDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Describe the Quiz Questions</AlertDialogTitle>
+            <AlertDialogDescription>
+              Optionally describe what kind of questions you want. The AI will use this along with the title and difficulty.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Textarea
+            value={quizPromptDescription}
+            onChange={(e) => setQuizPromptDescription(e.target.value)}
+            placeholder="e.g. Focus on word problems involving fractions with real-world scenarios..."
+            rows={4}
+            className="mt-2"
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                setShowQuizDialog(false);
+                handleGenerateQuiz(quizPromptDescription);
+              }}
+            >
+              Generate
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </AdminGuard>
   );
 }

@@ -13,7 +13,7 @@ import { getUserSettings, updateUserSettings } from "@/lib/user-settings";
 export type FontSize = "small" | "medium" | "large" | "extra-large";
 export type ColorMode = "light" | "dark" | "system";
 
-interface AccessibilitySettings {
+export interface AccessibilitySettings {
   colorMode: ColorMode;
   highContrast: boolean;
   fontSize: FontSize;

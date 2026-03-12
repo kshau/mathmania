@@ -1,24 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
 
 export async function POST(request: NextRequest) {
   try {
-    const { topic, difficulty, numQuestions = 5 } = await request.json();
+    const { topic, difficulty, numQuestions = 5, description = "" } = await request.json();
 
     if (!topic) {
       return NextResponse.json({ error: "Topic is required" }, { status: 400 });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
-        { error: "Gemini API key not configured" },
+        { error: "OpenAI API key not configured" },
         { status: 500 }
       );
     }
-
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `Create a ${numQuestions}-question multiple choice quiz about "${topic}" for ${
       difficulty || "Easy"
@@ -29,7 +27,8 @@ Return ONLY a valid JSON array with this exact structure:
   {
     "question": "Question text here?",
     "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
-    "correctAnswer": 0
+    "correctAnswer": 0,
+    "explanation": "A paragraph detailing why the correct answer is right, showing all work and intermediate steps used to arrive at the final answer."
   }
 ]
 
@@ -38,11 +37,14 @@ Important:
 - Include exactly ${numQuestions} questions
 - Make questions appropriate for ${difficulty || "Easy"} difficulty
 - Ensure exactly 4 options per question
-- Return ONLY the JSON array, no other text or markdown formatting`;
+- explanation should be A paragraph detailing why the correct answer is right, showing all work and intermediate steps used to arrive at the final answer. 3-4 sentences.
+- Return ONLY the JSON array, no other text or markdown formatting${description ? `\n\nAdditional instructions: ${description}` : ""}`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let content = response.text().trim();
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+    });
+    let content = (completion.choices[0].message.content ?? "").trim();
 
     // Clean up the response - remove markdown code blocks if present
     content = content

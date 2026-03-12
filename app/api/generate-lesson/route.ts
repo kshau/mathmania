@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || "" });
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,14 +11,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Topic is required" }, { status: 400 });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
-        { error: "Gemini API key not configured" },
+        { error: "OpenAI API key not configured" },
         { status: 500 }
       );
     }
-
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const prompt = `Create a comprehensive math lesson about "${topic}" for ${
       difficulty || "Easy"
@@ -35,9 +33,12 @@ Make it engaging and appropriate for students learning this topic. Use clear lan
 
 Format the response as Markdown with proper headings, lists, and code blocks where appropriate.`;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const content = response.text();
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const content = completion.choices[0].message.content ?? "";
 
     return NextResponse.json({ content });
   } catch (error) {

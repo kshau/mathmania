@@ -350,7 +350,7 @@ export default function ParentPage() {
   return (
     <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8 max-w-6xl">
       {/* Header */}
-      <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8">
+      <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8 mt-24">
         <Shield className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
         <div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">

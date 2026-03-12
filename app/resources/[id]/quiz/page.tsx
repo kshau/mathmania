@@ -27,6 +27,7 @@ type Question = {
   question: string;
   options: string[];
   correctAnswer: number;
+  explanation?: string;
 };
 
 export default function QuizPage() {
@@ -60,6 +61,7 @@ export default function QuizPage() {
           xp: typeof data.xp === "number" ? data.xp : 0,
           duration: data.duration ?? "10 min",
         });
+        console.log(data.questions);
         setQuestions(Array.isArray(data.questions) ? data.questions : []);
       } catch (err) {
         console.error("Error loading quiz:", err);
@@ -347,6 +349,12 @@ export default function QuizPage() {
                           );
                         })}
                       </div>
+                      {q.explanation && (
+                        <div className="pl-6 sm:pl-7 mt-2 sm:mt-3 p-2.5 sm:p-3 bg-blue-50 dark:bg-blue-950/20 rounded text-sm sm:text-base text-blue-800 dark:text-blue-200">
+                          <span className="font-semibold">Explanation: </span>
+                          {q.explanation}
+                        </div>
+                      )}
                     </div>
                   </Card>
                 );

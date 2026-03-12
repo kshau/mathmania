@@ -16,6 +16,8 @@ import {
 import { useAuth } from "@/contexts/auth-provider";
 import { useUserProfile } from "@/hooks/use-user-profile";
 import { auth } from "@/lib/firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 
 export function Navigation() {
   const pathname = usePathname();
@@ -39,7 +41,7 @@ export function Navigation() {
       : [];
 
   return (
-    <nav className="border-b border-border bg-card relative z-50">
+    <nav className="border-b border-border bg-card fixed w-screen z-50">
       <div className="container mx-auto px-3 sm:px-4">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
@@ -81,15 +83,15 @@ export function Navigation() {
             {user ? (
               <>
                 {!isLandingPage && (
-                  <Button variant="ghost" size="lg" asChild>
+                  <Button size="lg" asChild>
                     <Link href="/settings">
-                      <Settings className="h-5 w-5 mr-2" />
+                      <FontAwesomeIcon icon={faGear}/>
                       Settings
                     </Link>
                   </Button>
                 )}
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   size="lg"
                   onClick={async () => {
                     setIsSigningOut(true);
@@ -101,6 +103,7 @@ export function Navigation() {
                   }}
                   disabled={isSigningOut}
                 >
+                 <FontAwesomeIcon icon={faRightFromBracket} />
                   {isSigningOut ? "Signing out..." : "Sign out"}
                 </Button>
               </>
@@ -171,12 +174,12 @@ export function Navigation() {
           {user && !isLandingPage && (
             <Button
               asChild
-              variant="ghost"
-              size="sm"
+              variant="outline"
+              size="lg"
               className="flex-1 flex-col h-auto py-2 sm:py-3 gap-0.5 sm:gap-1 min-w-[60px]"
             >
               <Link href="/settings">
-                <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
+                <FontAwesomeIcon icon={faGear}/>
                 <span className="text-[10px] sm:text-xs">Settings</span>
               </Link>
             </Button>
