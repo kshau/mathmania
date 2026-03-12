@@ -276,7 +276,7 @@ export default function ChildPage() {
   return (
     <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8 max-w-6xl">
       {/* Character Display Section */}
-      <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 mt-24">
+      <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-12 mt-40 lg:mt-24">
         {/* Character Avatar */}
         <div className="relative mb-4 sm:mb-6">
           <div

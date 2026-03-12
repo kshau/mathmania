@@ -228,19 +228,19 @@ function LandingPage() {
 						<p className="text-xl sm:text-2xl text-center text-gray-700 mb-16 max-w-3xl mx-auto">
 							To make math learning enjoyable, accessible, and effective for every child
 						</p>
-						<div className="grid md:grid-cols-3 gap-10 items-center">
+						<div className="grid md:grid-cols-3 gap-6 lg:gap-10 items-center">
 							{[
-								{ icon: Trophy, title: "Build Confidence", description: "Help children develop strong math foundations and build confidence through positive reinforcement and achievements.", wrapperClass: "-rotate-3 translate-y-6", cardClass: "p-10" },
-								{ icon: Zap, title: "Make Learning Fun", description: "Transform traditional math education into an engaging, interactive experience that kids actually enjoy.", wrapperClass: "-translate-y-4", cardClass: "p-12" },
-								{ icon: Users, title: "Support Parents", description: "Provide parents with tools to monitor progress and support their child's learning journey effectively.", wrapperClass: "rotate-3 translate-y-6", cardClass: "p-10" },
-							].map(({ icon: Icon, title, description, wrapperClass, cardClass }) => (
+								{ icon: Trophy, title: "Build Confidence", description: "Help children develop strong math foundations and build confidence through positive reinforcement and achievements.", wrapperClass: "lg:-rotate-3 lg:translate-y-6" },
+								{ icon: Zap, title: "Make Learning Fun", description: "Transform traditional math education into an engaging, interactive experience that kids actually enjoy.", wrapperClass: "lg:-translate-y-4" },
+								{ icon: Users, title: "Support Parents", description: "Provide parents with tools to monitor progress and support their child's learning journey effectively.", wrapperClass: "lg:rotate-3 lg:translate-y-6" },
+							].map(({ icon: Icon, title, description, wrapperClass }) => (
 								<div key={title} className={`transition-transform duration-300 hover:scale-105 ${wrapperClass}`}>
-									<Card className={`border-2 hover:shadow-xl ${cardClass}`}>
+									<Card className={`border-2 hover:shadow-xl p-6 lg:p-10`}>
 										<div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
 											<Icon className="h-6 w-6 text-blue-600" />
 										</div>
-										<h3 className="text-2xl font-black mb-3 text-gray-900">{title}</h3>
-										<p className="text-gray-600 leading-relaxed text-lg">{description}</p>
+										<h3 className="text-xl lg:text-2xl font-black mb-3 text-gray-900">{title}</h3>
+										<p className="text-gray-600 leading-relaxed text-md lg:text-lg">{description}</p>
 									</Card>
 								</div>
 							))}

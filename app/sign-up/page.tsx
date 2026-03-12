@@ -202,7 +202,7 @@ export default function SignUpPage() {
 
 	return (
 		<div className="flex flex-col h-screen items-center justify-center px-3 sm:px-4 py-6 sm:py-8 md:py-12">
-			<Card>
+			<Card className="mt-16">
 				<CardHeader className="p-4 sm:p-6">
 					<CardTitle className="text-2xl sm:text-3xl font-bold text-center">
 						Create an account
@@ -213,9 +213,9 @@ export default function SignUpPage() {
 				</CardHeader>
 				<CardContent className="p-4 sm:p-6">
 
-					<form onSubmit={handleSubmit} className="flex flex-row gap-10">
+					<form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-4 lg:gap-10">
 
-						<div className="space-y-4 sm:space-y-6 min-w-60">
+						<div className="space-y-4 sm:space-y-6 min-w-60 w-full">
 
 							<div className="space-y-2">
 								<Label htmlFor="email">Email</Label>
