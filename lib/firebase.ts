@@ -7,7 +7,6 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBdqN3FjrXG-RzxXE4emsAccFJ-mjgcb-Y",
   authDomain: "mathmania-344ff.firebaseapp.com",
   projectId: "mathmania-344ff",
   storageBucket: "mathmania-344ff.firebasestorage.app",
