@@ -12,11 +12,13 @@ import { getUserSettings, updateUserSettings } from "@/lib/user-settings";
 
 export type FontSize = "small" | "medium" | "large" | "extra-large";
 export type ColorMode = "light" | "dark" | "system";
+export type Language = "en" | "es";
 
 export interface AccessibilitySettings {
   colorMode: ColorMode;
   highContrast: boolean;
   fontSize: FontSize;
+  language: Language;
   reduceMotion: boolean;
   increasedSpacing: boolean;
   screenReaderOptimized: boolean;
@@ -37,6 +39,7 @@ const defaultSettings: AccessibilitySettings = {
   colorMode: "light",
   highContrast: false,
   fontSize: "medium",
+  language: "en",
   reduceMotion: false,
   increasedSpacing: false,
   screenReaderOptimized: false,
@@ -121,6 +124,9 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
       "font-size-extra-large"
     );
     body.classList.add(`font-size-${settings.fontSize}`);
+
+    // Language (triggers browser translate prompts when different from user locale)
+    html.lang = settings.language;
 
     // Reduce motion
     html.classList.toggle("reduce-motion", settings.reduceMotion);

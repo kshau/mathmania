@@ -223,7 +223,7 @@ export default function AdminResourcesPage() {
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8 max-w-3xl">
         <Button
           variant="ghost"
-          className="mb-3 sm:mb-4 text-sm sm:text-base"
+          className="mb-3 sm:mb-4 text-sm sm:text-base mt-24"
           size="sm"
           onClick={() => router.push("/admin")}
         >

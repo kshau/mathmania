@@ -4,6 +4,7 @@ import {
   useAccessibility,
   type ColorMode,
   type FontSize,
+  type Language,
 } from "@/contexts/accessibility-provider";
 import { SettingSection } from "./settings-section";
 import { SettingRow } from "./settings-row";
@@ -172,6 +173,27 @@ export function AccessibilitySettings() {
             }
             aria-label="Toggle screen reader optimization"
           />
+        </SettingRow>
+
+        <SettingRow
+          label="Language"
+          description="Set the page language (helps browser translate pages)"
+          htmlFor="language"
+        >
+          <Select
+            value={settings.language}
+            onValueChange={(value: Language) =>
+              updateSetting("language", value)
+            }
+          >
+            <SelectTrigger id="language" className="w-40">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="es">Español</SelectItem>
+            </SelectContent>
+          </Select>
         </SettingRow>
       </SettingSection>
 
