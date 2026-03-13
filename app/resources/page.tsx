@@ -17,7 +17,7 @@ import {
 import type { Resource } from "@/lib/resources";
 import { db } from "@/lib/firebase";
 
-type ResourceType = "all" | "lesson" | "video" | "quiz" | "download";
+type ResourceType = "all" | "lesson" | "video" | "quiz";
 
 export default function ResourcesPage() {
   const router = useRouter();
@@ -28,10 +28,8 @@ export default function ResourcesPage() {
 
   const filterButtons: { type: ResourceType; label: string; icon: any }[] = [
     { type: "all", label: "All", icon: BookOpen },
-    { type: "lesson", label: "Lessons", icon: BookOpen },
     { type: "video", label: "Videos", icon: Video },
-    { type: "quiz", label: "Quizzes", icon: FileQuestion },
-    { type: "download", label: "Downloads", icon: Download },
+    { type: "quiz", label: "Quizzes", icon: FileQuestion }
   ];
 
   useEffect(() => {
@@ -91,8 +89,6 @@ export default function ResourcesPage() {
         return "bg-pink-500";
       case "quiz":
         return "bg-blue-500";
-      case "download":
-        return "bg-green-500";
       default:
         return "bg-gray-500";
     }

@@ -77,7 +77,7 @@ function ProductDemo() {
 				</div>
 			</div>
 			{/* Demo screenshot */}
-			<Image src="/landing-demo.png" alt="MathMania product demo" width={1280} height={720} className="w-full" />
+			<Image src="/hero.png" alt="MathMania product demo" width={1280} height={720} className="w-full" />
 		</div>
 	)
 

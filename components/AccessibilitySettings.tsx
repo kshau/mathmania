@@ -86,48 +86,6 @@ export function AccessibilitySettings() {
         title="Text & Readability"
         description="Adjust text size and spacing for easier reading"
       >
-        <SettingRow
-          label="Font Size"
-          description="Adjust the base text size throughout the interface"
-          htmlFor="font-size"
-        >
-          <Select
-            value={settings.fontSize}
-            onValueChange={(value: FontSize) =>
-              updateSetting("fontSize", value)
-            }
-          >
-            <SelectTrigger id="font-size" className="w-40">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="small">
-                <span className="flex items-center gap-2">
-                  <Type className="h-3 w-3" />
-                  Small
-                </span>
-              </SelectItem>
-              <SelectItem value="medium">
-                <span className="flex items-center gap-2">
-                  <Type className="h-4 w-4" />
-                  Medium
-                </span>
-              </SelectItem>
-              <SelectItem value="large">
-                <span className="flex items-center gap-2">
-                  <Type className="h-5 w-5" />
-                  Large
-                </span>
-              </SelectItem>
-              <SelectItem value="extra-large">
-                <span className="flex items-center gap-2">
-                  <Type className="h-6 w-6" />
-                  Extra Large
-                </span>
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </SettingRow>
 
         <SettingRow
           label="Increased Spacing"

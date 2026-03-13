@@ -120,19 +120,19 @@
   }
 
   /* Font sizes */
-  html.font-size-small {
+  body.font-size-small {
     font-size: 87.5%; /* 14px default */
   }
 
-  html.font-size-medium {
+  body.font-size-medium {
     font-size: 100%; /* 16px default */
   }
 
-  html.font-size-large {
+  body.font-size-large {
     font-size: 112.5%; /* 18px default */
   }
 
-  html.font-size-extra-large {
+  body.font-size-extra-large {
     font-size: 125%; /* 20px default */
   }
 

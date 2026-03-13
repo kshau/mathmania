@@ -114,13 +114,13 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     html.classList.toggle("high-contrast", settings.highContrast);
 
     // Font size
-    html.classList.remove(
+    body.classList.remove(
       "font-size-small",
       "font-size-medium",
       "font-size-large",
       "font-size-extra-large"
     );
-    html.classList.add(`font-size-${settings.fontSize}`);
+    body.classList.add(`font-size-${settings.fontSize}`);
 
     // Reduce motion
     html.classList.toggle("reduce-motion", settings.reduceMotion);
